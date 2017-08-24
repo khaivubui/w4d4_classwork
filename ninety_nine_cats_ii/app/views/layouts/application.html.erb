@@ -9,6 +9,22 @@
   </head>
 
   <body>
+    <h1>
+      <% if current_user %>
+      Welcome, <%= current_user.username %>
+    </h1>
+    <form action="<%= session_url %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Logout">
+    </form>
+    <% else %>
+    <%= button_to "Login", new_session_url, method: :get %>
+    <% end %>
     <%= yield %>
+    <br><br>
+    <%= link_to "Request a cat", new_cat_rental_request_url %>
+    <br>
+    <%= link_to "Home", '/' %>
   </body>
 </html>
