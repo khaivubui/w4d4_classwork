@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   has_many :cat_rental_requests
 
+  has_many :session_tokens
+  
   def self.generate_session_token
     SecureRandom::urlsafe_base64(16)
   end
@@ -31,9 +33,9 @@ class User < ApplicationRecord
     user.is_password?(password) ? user : nil
   end
 
-  def ensure_session_token
-    self.session_token ||= User.generate_session_token
-  end
+  # def ensure_session_token
+  #   self.session_token ||= User.generate_session_token
+  # end
 
   def reset_session_token!
     self.session_token = User.generate_session_token
