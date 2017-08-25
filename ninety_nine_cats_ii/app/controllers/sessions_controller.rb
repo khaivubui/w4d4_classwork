@@ -15,14 +15,15 @@ class SessionsController < ApplicationController
       flash.now[:errors] = "INCORRECT LOGIN"
       render :new
     else # correct login
-      @user.reset_session_token!
+      # @user.reset_session_token!
       login!(@user)
       redirect_to cats_url
     end
   end
 
   def destroy
-    current_user.try(:reset_session_token!)
+    # current_user.try(:reset_session_token!)
+    SessionToken.find_by(session_token: session[:session_token]).delete
     session[:session_token] = nil
     redirect_to new_session_url
   end

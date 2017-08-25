@@ -1,3 +1,8 @@
-<h1>Show Page!</h1>
-
-<p><%= @user.username %></p>
+<h1>Logged in Devices:</h1>
+<% @user.session_tokens.each do |session_token| %>
+<%= session_token.device_info %>
+<%= button_to "Log this device out",
+              session_token_url(session_token),
+              method: :delete %>
+<br>
+<% end %>

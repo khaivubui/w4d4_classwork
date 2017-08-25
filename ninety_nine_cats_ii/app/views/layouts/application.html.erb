@@ -25,6 +25,10 @@
     <br><br>
     <%= link_to "Request a cat", new_cat_rental_request_url %>
     <br>
+    <% if current_user %>
+      <%= link_to "Manage logins", user_url(current_user) %>
+    <% end %>
+    <br>
     <%= link_to "Home", '/' %>
   </body>
 </html>
